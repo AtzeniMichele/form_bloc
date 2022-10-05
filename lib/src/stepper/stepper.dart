@@ -70,7 +70,7 @@ const Color _kCircleActiveLight = Colors.white;
 const Color _kCircleActiveDark = Colors.black87;
 const Color _kDisabledLight = Colors.black38;
 const Color _kDisabledDark = Colors.white38;
-const double _kStepSize = 24.0;
+const double _kStepSize = 12.0;
 const double _kTriangleHeight =
     _kStepSize * 0.866025; // Triangle height. sqrt(3.0) / 2.0
 
@@ -343,11 +343,11 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     if (!_isDark()) {
       return widget.steps[index].isActive
-          ? colorScheme.primary
+          ? Colors.green
           : colorScheme.onSurface.withOpacity(0.38);
     } else {
       return widget.steps[index].isActive
-          ? colorScheme.secondary
+          ? Colors.green
           : colorScheme.background;
     }
   }
@@ -518,12 +518,12 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
       case StepState.indexed:
       case StepState.editing:
       case StepState.complete:
-        return textTheme.bodyText1;
+        return textTheme.bodyLarge;
       case StepState.disabled:
-        return textTheme.bodyText1!
+        return textTheme.bodyLarge!
             .copyWith(color: _isDark() ? _kDisabledDark : _kDisabledLight);
       case StepState.error:
-        return textTheme.bodyText1!
+        return textTheme.bodyLarge!
             .copyWith(color: _isDark() ? _kErrorDark : _kErrorLight);
     }
   }
@@ -535,7 +535,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
       case StepState.indexed:
       case StepState.editing:
       case StepState.complete:
-        return textTheme.caption;
+        return TextStyle(color: Colors.green, fontWeight: FontWeight.bold);
       case StepState.disabled:
         return textTheme.caption!
             .copyWith(color: _isDark() ? _kDisabledDark : _kDisabledLight);
