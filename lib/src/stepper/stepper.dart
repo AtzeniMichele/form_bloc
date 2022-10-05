@@ -456,10 +456,22 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
       child: ConstrainedBox(
         constraints: const BoxConstraints.tightFor(height: 48.0),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
           // The Material spec no longer includes a Stepper widget. The continue
           // and cancel button styles have been configured to match the original
           // version of this widget.
           children: <Widget>[
+            Container(
+              margin: const EdgeInsetsDirectional.only(start: 8.0),
+              child: TextButton(
+                onPressed: widget.onStepCancel,
+                style: TextButton.styleFrom(
+                  padding: buttonPadding,
+                  shape: buttonShape,
+                ),
+                child: Text("Back", style: TextStyle(color: Colors.grey)),
+              ),
+            ),
             TextButton(
               onPressed: widget.onStepContinue,
               style: ButtonStyle(
@@ -479,21 +491,12 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
                 }),
                 padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                     buttonPadding),
-                shape: MaterialStateProperty.all<OutlinedBorder>(buttonShape),
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        side: BorderSide(color: Colors.green))),
               ),
               child: Text(localizations.continueButtonLabel),
-            ),
-            Container(
-              margin: const EdgeInsetsDirectional.only(start: 8.0),
-              child: TextButton(
-                onPressed: widget.onStepCancel,
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.grey,
-                  padding: buttonPadding,
-                  shape: buttonShape,
-                ),
-                child: Text(localizations.cancelButtonLabel),
-              ),
             ),
           ],
         ),
