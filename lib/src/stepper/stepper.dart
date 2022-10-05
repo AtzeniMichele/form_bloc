@@ -316,7 +316,8 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
       case StepState.indexed:
       case StepState.disabled:
         return Text(
-          '${index + 1}',
+          //'${index + 1}',
+          '',
           style: isDarkActive
               ? _kStepStyle.copyWith(color: Colors.black87)
               : _kStepStyle,
@@ -471,7 +472,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
                   shape: buttonShape,
                 ),
                 child: const Text("Back",
-                    style: TextStyle(color: Colors.grey, fontSize: 20)),
+                    style: TextStyle(color: Colors.grey, fontSize: 15)),
               ),
             ),
             ElevatedButton(
@@ -497,7 +498,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
                     buttonPadding),
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                     RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(10.0),
                 )),
               ),
               child: Text('Next',
