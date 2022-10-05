@@ -874,6 +874,9 @@ class _TextFieldBlocBuilderState extends State<TextFieldBlocBuilder> {
     }
 
     decoration = decoration.copyWith(
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(width: 3, color: Colors.green),
+      ),
       errorText: Style.getErrorText(
         context: context,
         errorBuilder: widget.errorBuilder,
