@@ -875,7 +875,7 @@ class _TextFieldBlocBuilderState extends State<TextFieldBlocBuilder> {
 
     decoration = decoration.copyWith(
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(width: 3, color: Colors.greenAccent),
+        borderSide: BorderSide(width: 3, color: Colors.green),
       ),
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(width: 3, color: Colors.green),
