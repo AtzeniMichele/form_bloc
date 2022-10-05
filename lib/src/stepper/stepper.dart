@@ -466,35 +466,39 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
               child: TextButton(
                 onPressed: widget.onStepCancel,
                 style: TextButton.styleFrom(
+                  shadowColor: Colors.transparent,
                   padding: buttonPadding,
                   shape: buttonShape,
                 ),
-                child: Text("Back", style: TextStyle(color: Colors.grey)),
+                child: const Text("Back", style: TextStyle(color: Colors.grey)),
               ),
             ),
             TextButton(
               onPressed: widget.onStepContinue,
               style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-                    (Set<MaterialState> states) {
-                  return states.contains(MaterialState.disabled)
-                      ? null
-                      : (_isDark()
-                          ? colorScheme.onSurface
-                          : colorScheme.onPrimary);
-                }),
-                backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                    (Set<MaterialState> states) {
-                  return _isDark() || states.contains(MaterialState.disabled)
-                      ? null
-                      : colorScheme.primary;
-                }),
+                // foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+                //     (Set<MaterialState> states) {
+                //   return states.contains(MaterialState.disabled)
+                //       ? null
+                //       : (_isDark()
+                //           ? colorScheme.onSurface
+                //           : colorScheme.onPrimary);
+                // }),
+                // backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                //     (Set<MaterialState> states) {
+                //   return _isDark() || states.contains(MaterialState.disabled)
+                //       ? null
+                //       : colorScheme.primary;
+                // }),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
                 padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                     buttonPadding),
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                     RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
-                        side: BorderSide(color: Colors.green))),
+                        side: BorderSide(
+                            color: Color.fromARGB(255, 32, 104, 35)))),
               ),
               child: Text(localizations.continueButtonLabel),
             ),
