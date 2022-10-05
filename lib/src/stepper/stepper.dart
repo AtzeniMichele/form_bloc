@@ -519,9 +519,10 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
       case StepState.editing:
       case StepState.complete:
         return TextStyle(
-            color: Colors.green, fontWeight: FontWeight.bold, fontSize: 10);
+            color: Colors.green, fontWeight: FontWeight.bold, fontSize: 20);
       case StepState.disabled:
-        return TextStyle(color: Colors.black, fontSize: 10);
+        return textTheme.bodyLarge!
+            .copyWith(color: _isDark() ? _kDisabledDark : _kDisabledLight);
       case StepState.error:
         return textTheme.bodyLarge!
             .copyWith(color: _isDark() ? _kErrorDark : _kErrorLight);
@@ -535,7 +536,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
       case StepState.indexed:
       case StepState.editing:
       case StepState.complete:
-        return TextStyle(color: Colors.green, fontWeight: FontWeight.bold);
+        return TextStyle(color: Colors.black, fontSize: 20);
       case StepState.disabled:
         return textTheme.caption!
             .copyWith(color: _isDark() ? _kDisabledDark : _kDisabledLight);
