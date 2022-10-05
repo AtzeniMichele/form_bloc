@@ -514,18 +514,23 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
     final ThemeData themeData = Theme.of(context);
     final TextTheme textTheme = themeData.textTheme;
 
-    switch (widget.steps[index].state) {
-      case StepState.indexed:
-      case StepState.editing:
-      case StepState.complete:
-        return TextStyle(
-            color: Colors.green, fontWeight: FontWeight.bold, fontSize: 15);
-      case StepState.disabled:
-        return TextStyle(color: Colors.black, fontSize: 15);
-      case StepState.error:
-        return textTheme.bodyLarge!
-            .copyWith(color: _isDark() ? _kErrorDark : _kErrorLight);
-    }
+    return widget.steps[index].isActive
+        ? TextStyle(
+            color: Colors.green, fontWeight: FontWeight.bold, fontSize: 15)
+        : TextStyle(color: Colors.black, fontSize: 15);
+
+    // switch (widget.steps[index].state) {
+    //   case StepState.indexed:
+    //   case StepState.editing:
+    //   case StepState.complete:
+    //     return TextStyle(
+    //         color: Colors.green, fontWeight: FontWeight.bold, fontSize: 15);
+    //   case StepState.disabled:
+    //     return TextStyle(color: Colors.black, fontSize: 15);
+    //   case StepState.error:
+    //     return textTheme.bodyLarge!
+    //         .copyWith(color: _isDark() ? _kErrorDark : _kErrorLight);
+    // }
   }
 
   TextStyle? _subtitleStyle(int index) {
