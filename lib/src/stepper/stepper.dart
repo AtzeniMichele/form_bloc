@@ -474,7 +474,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
                     style: TextStyle(color: Colors.grey, fontSize: 20)),
               ),
             ),
-            TextButton(
+            ElevatedButton(
               onPressed: widget.onStepContinue,
               style: ButtonStyle(
                 // foregroundColor: MaterialStateProperty.resolveWith<Color?>(
@@ -497,7 +497,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
                     buttonPadding),
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                     RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(15.0),
                 )),
               ),
               child: Text('Next',
