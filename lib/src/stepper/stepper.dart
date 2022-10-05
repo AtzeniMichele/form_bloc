@@ -516,14 +516,12 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
 
     switch (widget.steps[index].state) {
       case StepState.indexed:
-        return TextStyle(color: Colors.black, fontSize: 15);
       case StepState.editing:
       case StepState.complete:
         return TextStyle(
             color: Colors.green, fontWeight: FontWeight.bold, fontSize: 15);
       case StepState.disabled:
-        return textTheme.bodyLarge!
-            .copyWith(color: _isDark() ? _kDisabledDark : _kDisabledLight);
+        return TextStyle(color: Colors.black, fontSize: 15);
       case StepState.error:
         return textTheme.bodyLarge!
             .copyWith(color: _isDark() ? _kErrorDark : _kErrorLight);
