@@ -470,7 +470,8 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
                   padding: buttonPadding,
                   shape: buttonShape,
                 ),
-                child: const Text("Back", style: TextStyle(color: Colors.grey)),
+                child: const Text("Back",
+                    style: TextStyle(color: Colors.grey, fontSize: 15)),
               ),
             ),
             TextButton(
@@ -496,11 +497,11 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
                     buttonPadding),
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                     RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        side: BorderSide(
-                            color: Color.fromARGB(255, 32, 104, 35)))),
+                  borderRadius: BorderRadius.circular(10.0),
+                )),
               ),
-              child: Text(localizations.continueButtonLabel),
+              child: Text('Next',
+                  style: TextStyle(fontSize: 15, color: Colors.white)),
             ),
           ],
         ),
