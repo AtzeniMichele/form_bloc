@@ -478,6 +478,8 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
             ElevatedButton(
               onPressed: widget.onStepContinue,
               style: ButtonStyle(
+                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                    const EdgeInsets.symmetric(horizontal: 50, vertical: 20)),
                 // foregroundColor: MaterialStateProperty.resolveWith<Color?>(
                 //     (Set<MaterialState> states) {
                 //   return states.contains(MaterialState.disabled)
@@ -493,13 +495,14 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
                 //       : colorScheme.primary;
                 // }),
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                    buttonPadding),
-                shape: MaterialStateProperty.all<OutlinedBorder>(
-                    RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                )),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Color(0xff8ac185)),
+                // padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                //     buttonPadding),
+                // shape: MaterialStateProperty.all<OutlinedBorder>(
+                //     RoundedRectangleBorder(
+                //   borderRadius: BorderRadius.circular(5.0),
+                // )),
               ),
               child: Text('Next',
                   style: TextStyle(fontSize: 25, color: Colors.white)),
