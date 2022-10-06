@@ -739,6 +739,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
         SizedBox(
           height: widget.titleHeight,
           child: ListView.builder(
+            controller: ScrollController(keepScrollOffset: false),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemCount: children.length,
@@ -747,7 +748,6 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
         ),
         Expanded(
           child: ListView(
-            key: ObjectKey(0),
             controller: ScrollController(keepScrollOffset: false),
             physics: widget.physics,
             padding: const EdgeInsets.all(24.0),
