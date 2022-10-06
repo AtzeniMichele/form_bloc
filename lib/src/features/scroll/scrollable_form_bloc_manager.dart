@@ -48,7 +48,7 @@ class ScrollableFormBlocManager extends StatelessWidget {
     Scrollable.ensureVisible(
       target.context,
       duration: duration ?? scrollableConfig.duration,
-      alignment: alignment ?? 0,
+      alignment: 0,
       curve: curve ?? scrollableConfig.curve,
       alignmentPolicy: alignmentPolicy ?? scrollableConfig.alignmentPolicy,
     );
