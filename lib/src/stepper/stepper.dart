@@ -747,6 +747,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
         ),
         Expanded(
           child: ListView(
+            controller: ScrollController(keepScrollOffset: false),
             physics: widget.physics,
             padding: const EdgeInsets.all(24.0),
             children: <Widget>[
