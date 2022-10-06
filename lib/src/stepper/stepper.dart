@@ -70,7 +70,7 @@ const Color _kCircleActiveLight = Colors.white;
 const Color _kCircleActiveDark = Colors.black87;
 const Color _kDisabledLight = Colors.black38;
 const Color _kDisabledDark = Colors.white38;
-const double _kStepSize = 12.0;
+const double _kStepSize = 24.0;
 const double _kTriangleHeight =
     _kStepSize * 0.866025; // Triangle height. sqrt(3.0) / 2.0
 
@@ -316,8 +316,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
       case StepState.indexed:
       case StepState.disabled:
         return Text(
-          //'${index + 1}',
-          '',
+          '${index + 1}',
           style: isDarkActive
               ? _kStepStyle.copyWith(color: Colors.black87)
               : _kStepStyle,
@@ -343,11 +342,11 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     if (!_isDark()) {
       return widget.steps[index].isActive
-          ? Color(0xff8ac185)
+          ? colorScheme.primary
           : colorScheme.onSurface.withOpacity(0.38);
     } else {
       return widget.steps[index].isActive
-          ? Color(0xff8ac185)
+          ? colorScheme.secondary
           : colorScheme.background;
     }
   }
@@ -457,55 +456,44 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
       child: ConstrainedBox(
         constraints: const BoxConstraints.tightFor(height: 48.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
           // The Material spec no longer includes a Stepper widget. The continue
           // and cancel button styles have been configured to match the original
           // version of this widget.
           children: <Widget>[
+            TextButton(
+              onPressed: widget.onStepContinue,
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                  return states.contains(MaterialState.disabled)
+                      ? null
+                      : (_isDark()
+                          ? colorScheme.onSurface
+                          : colorScheme.onPrimary);
+                }),
+                backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                  return _isDark() || states.contains(MaterialState.disabled)
+                      ? null
+                      : colorScheme.primary;
+                }),
+                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                    buttonPadding),
+                shape: MaterialStateProperty.all<OutlinedBorder>(buttonShape),
+              ),
+              child: Text(localizations.continueButtonLabel),
+            ),
             Container(
               margin: const EdgeInsetsDirectional.only(start: 8.0),
               child: TextButton(
                 onPressed: widget.onStepCancel,
                 style: TextButton.styleFrom(
-                  shadowColor: Colors.transparent,
+                  primary: cancelColor,
                   padding: buttonPadding,
                   shape: buttonShape,
                 ),
-                child: const Text("Back",
-                    style: TextStyle(color: Colors.grey, fontSize: 15)),
+                child: Text(localizations.cancelButtonLabel),
               ),
-            ),
-            ElevatedButton(
-              onPressed: widget.onStepContinue,
-              style: ButtonStyle(
-                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 20)),
-                // foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-                //     (Set<MaterialState> states) {
-                //   return states.contains(MaterialState.disabled)
-                //       ? null
-                //       : (_isDark()
-                //           ? colorScheme.onSurface
-                //           : colorScheme.onPrimary);
-                // }),
-                // backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                //     (Set<MaterialState> states) {
-                //   return _isDark() || states.contains(MaterialState.disabled)
-                //       ? null
-                //       : colorScheme.primary;
-                // }),
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Color(0xff8ac185)),
-                // padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                //     buttonPadding),
-                // shape: MaterialStateProperty.all<OutlinedBorder>(
-                //     RoundedRectangleBorder(
-                //   borderRadius: BorderRadius.circular(5.0),
-                // )),
-              ),
-              child: Text('Next',
-                  style: TextStyle(fontSize: 20, color: Colors.white)),
             ),
           ],
         ),
@@ -517,23 +505,18 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
     final ThemeData themeData = Theme.of(context);
     final TextTheme textTheme = themeData.textTheme;
 
-    return widget.steps[index].isActive
-        ? TextStyle(
-            color: Color(0xff8ac185), fontWeight: FontWeight.bold, fontSize: 18)
-        : TextStyle(color: Colors.black, fontSize: 15);
-
-    // switch (widget.steps[index].state) {
-    //   case StepState.indexed:
-    //   case StepState.editing:
-    //   case StepState.complete:
-    //     return TextStyle(
-    //         color: Colors.green, fontWeight: FontWeight.bold, fontSize: 15);
-    //   case StepState.disabled:
-    //     return TextStyle(color: Colors.black, fontSize: 15);
-    //   case StepState.error:
-    //     return textTheme.bodyLarge!
-    //         .copyWith(color: _isDark() ? _kErrorDark : _kErrorLight);
-    // }
+    switch (widget.steps[index].state) {
+      case StepState.indexed:
+      case StepState.editing:
+      case StepState.complete:
+        return textTheme.bodyText1;
+      case StepState.disabled:
+        return textTheme.bodyText1!
+            .copyWith(color: _isDark() ? _kDisabledDark : _kDisabledLight);
+      case StepState.error:
+        return textTheme.bodyText1!
+            .copyWith(color: _isDark() ? _kErrorDark : _kErrorLight);
+    }
   }
 
   TextStyle? _subtitleStyle(int index) {
@@ -543,7 +526,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
       case StepState.indexed:
       case StepState.editing:
       case StepState.complete:
-        return TextStyle(color: Colors.black, fontSize: 20);
+        return textTheme.caption;
       case StepState.disabled:
         return textTheme.caption!
             .copyWith(color: _isDark() ? _kDisabledDark : _kDisabledLight);
@@ -690,7 +673,6 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
     final List<Widget> children = <Widget>[
       for (int i = 0; i < widget.steps.length; i += 1) ...<Widget>[
         InkResponse(
-          hoverColor: Colors.transparent,
           onTap: widget.steps[i].state != StepState.disabled
               ? () {
                   widget.onStepTapped?.call(i);
@@ -738,7 +720,6 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
         SizedBox(
           height: widget.titleHeight,
           child: ListView.builder(
-            //physics: widget.physics,
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemCount: children.length,
@@ -756,9 +737,6 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
                 child: Column(
                     children: stepPanels,
                     crossAxisAlignment: CrossAxisAlignment.stretch),
-              ),
-              Divider(
-                thickness: 1,
               ),
               _buildVerticalControls(widget.currentStep),
             ],
