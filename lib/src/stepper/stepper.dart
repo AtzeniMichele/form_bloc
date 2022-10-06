@@ -260,8 +260,6 @@ class Stepper extends StatefulWidget {
 class _StepperState extends State<Stepper> with TickerProviderStateMixin {
   late List<GlobalKey> _keys;
   final Map<int, StepState> _oldStates = <int, StepState>{};
-  ScrollController _scrollController =
-      ScrollController(keepScrollOffset: false);
 
   @override
   void initState() {
@@ -654,7 +652,6 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
 
   Widget _buildVertical() {
     return ListView(
-      controller: _scrollController,
       shrinkWrap: true,
       physics: widget.physics,
       children: <Widget>[
@@ -749,7 +746,6 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
         ),
         Expanded(
           child: ListView(
-            controller: _scrollController,
             physics: widget.physics,
             padding: const EdgeInsets.all(24.0),
             children: <Widget>[
