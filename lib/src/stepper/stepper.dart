@@ -472,7 +472,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
                   shape: buttonShape,
                 ),
                 child: const Text("Back",
-                    style: TextStyle(color: Colors.grey, fontSize: 20)),
+                    style: TextStyle(color: Colors.grey, fontSize: 15)),
               ),
             ),
             ElevatedButton(
@@ -505,7 +505,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
                 // )),
               ),
               child: Text('Next',
-                  style: TextStyle(fontSize: 25, color: Colors.white)),
+                  style: TextStyle(fontSize: 20, color: Colors.white)),
             ),
           ],
         ),
@@ -634,9 +634,6 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
             child: Column(
               children: <Widget>[
                 widget.steps[index].content,
-                Divider(
-                  thickness: 1,
-                ),
                 _buildVerticalControls(index),
               ],
             ),
@@ -758,6 +755,9 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
                 child: Column(
                     children: stepPanels,
                     crossAxisAlignment: CrossAxisAlignment.stretch),
+              ),
+              Divider(
+                thickness: 1,
               ),
               _buildVerticalControls(widget.currentStep),
             ],
