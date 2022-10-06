@@ -478,12 +478,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
               ),
             ),
             ElevatedButton(
-              onPressed: () => {
-                widget.onStepContinue,
-                _scrollController.animateTo(0,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut)
-              },
+              onPressed: widget.onStepContinue,
               style: ButtonStyle(
                 padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                     const EdgeInsets.symmetric(horizontal: 50, vertical: 20)),
