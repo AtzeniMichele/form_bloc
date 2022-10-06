@@ -343,11 +343,11 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     if (!_isDark()) {
       return widget.steps[index].isActive
-          ? Colors.green
+          ? Color(0xff8ac185)
           : colorScheme.onSurface.withOpacity(0.38);
     } else {
       return widget.steps[index].isActive
-          ? Colors.green
+          ? Color(0xff8ac185)
           : colorScheme.background;
     }
   }
@@ -472,7 +472,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
                   shape: buttonShape,
                 ),
                 child: const Text("Back",
-                    style: TextStyle(color: Colors.grey, fontSize: 15)),
+                    style: TextStyle(color: Colors.grey, fontSize: 20)),
               ),
             ),
             ElevatedButton(
@@ -519,7 +519,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
 
     return widget.steps[index].isActive
         ? TextStyle(
-            color: Colors.green, fontWeight: FontWeight.bold, fontSize: 15)
+            color: Color(0xff8ac185), fontWeight: FontWeight.bold, fontSize: 18)
         : TextStyle(color: Colors.black, fontSize: 15);
 
     // switch (widget.steps[index].state) {
@@ -634,6 +634,9 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
             child: Column(
               children: <Widget>[
                 widget.steps[index].content,
+                Divider(
+                  thickness: 1,
+                ),
                 _buildVerticalControls(index),
               ],
             ),
@@ -690,6 +693,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
     final List<Widget> children = <Widget>[
       for (int i = 0; i < widget.steps.length; i += 1) ...<Widget>[
         InkResponse(
+          hoverColor: Colors.transparent,
           onTap: widget.steps[i].state != StepState.disabled
               ? () {
                   widget.onStepTapped?.call(i);
