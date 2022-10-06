@@ -478,11 +478,11 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
               ),
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () => {
+                widget.onStepContinue,
                 _scrollController.animateTo(0,
                     duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut);
-                widget.onStepContinue;
+                    curve: Curves.easeInOut)
               },
               style: ButtonStyle(
                 padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
@@ -746,7 +746,6 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
         SizedBox(
           height: widget.titleHeight,
           child: ListView.builder(
-            controller: _scrollController,
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemCount: children.length,
