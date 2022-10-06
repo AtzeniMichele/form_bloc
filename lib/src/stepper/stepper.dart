@@ -652,7 +652,6 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
 
   Widget _buildVertical() {
     return ListView(
-      shrinkWrap: true,
       physics: widget.physics,
       children: <Widget>[
         for (int i = 0; i < widget.steps.length; i += 1)
@@ -738,7 +737,6 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
         SizedBox(
           height: widget.titleHeight,
           child: ListView.builder(
-            shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemCount: children.length,
             itemBuilder: (BuildContext context, int index) => children[index],
