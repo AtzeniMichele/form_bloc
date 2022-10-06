@@ -652,6 +652,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
 
   Widget _buildVertical() {
     return ListView(
+      controller: ScrollController(keepScrollOffset: false),
       shrinkWrap: true,
       physics: widget.physics,
       children: <Widget>[

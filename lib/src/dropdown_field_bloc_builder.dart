@@ -222,7 +222,7 @@ class DropdownFieldBlocBuilder<Value> extends StatelessWidget {
                     ),
                     icon: this.decoration.suffixIcon ??
                         fieldTheme.moreIcon ??
-                        const Icon(Icons.arrow_drop_down),
+                        const Icon(Icons.arrow_drop_down_rounded),
                   ),
                 ),
               ),
